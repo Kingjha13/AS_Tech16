@@ -1,6 +1,10 @@
 
 #!/bin/bash
-commit_message=${1:-"Update code"}
+SOURCE_DIR="../build"
+TARGET_DIR="."
+
+cp -r $SOURCE_DIR/* $TARGET_DIR
+
 git add .
-git commit -m "$commit_message"
+git commit -m "Update site files"
 git push origin main
