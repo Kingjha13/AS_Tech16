@@ -1,6 +1,6 @@
-#!/bin/bash
-rsync -av productionExecutable/ ./
-git add .
-git commit -m "Update changed files from build output"
-git push
 
+#!/bin/bash
+commit_message=${1:-"Update code"}
+git add .
+git commit -m "$commit_message"
+git push origin main
