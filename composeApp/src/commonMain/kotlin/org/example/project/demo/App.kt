@@ -38,6 +38,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.PlayArrow
@@ -255,7 +256,7 @@ import kotlinx.coroutines.delay
 //}
 
 @Composable
-fun BubbleSortVisualizer() {
+fun BubbleSortVisualizer(onNavigateToInsertionSort: () -> Unit) {
     var userInput by remember { mutableStateOf("5,3,8,1,2") }
     var values by remember { mutableStateOf(parseInput(userInput)) }
     var animatedValues = remember { mutableStateListOf<Int>().apply { addAll(values) } }
@@ -272,11 +273,9 @@ fun BubbleSortVisualizer() {
         for (i in 0 until animatedValues.size - 1) {
             for (j in 0 until animatedValues.size - i - 1) {
                 while (isPaused) delay(100L)
-
                 comparingIndices = j to j + 1
                 val a = animatedValues[j]
                 val b = animatedValues[j + 1]
-
                 comparisonMessage = when {
                     a > b -> {
                         animatedValues[j] = b
@@ -286,23 +285,13 @@ fun BubbleSortVisualizer() {
                     a < b -> "Comparing $a < $b — No swap needed"
                     else -> "Comparing $a == $b — No swap needed"
                 }
-
                 delay(delayTime)
             }
         }
         isSorting = false
         isPaused = true
-//        comparisonMessage = "✅ Sorting complete!"
-        comparisonMessage = "Avanish jha"
+        comparisonMessage = "✅ Sorting Complete!"
         comparingIndices = null
-    }
-
-    LaunchedEffect(comparisonMessage) {
-//        if (comparisonMessage == "✅ Sorting incomplete!") {
-        if (comparisonMessage == "Avanish jha") {
-            delay(2000L)
-            comparisonMessage = ""
-        }
     }
 
     val maxBarValue = animatedValues.maxOrNull()?.takeIf { it > 0 } ?: 1
@@ -389,29 +378,31 @@ fun BubbleSortVisualizer() {
                 }
             }) {
                 Icon(
-                    imageVector = if (!isSorting || isPaused) Icons.Filled.PlayArrow else Icons.Filled.Add,
-                    contentDescription = if (!isSorting || isPaused) "Start or Continue" else "Pause",
-                    modifier = Modifier.size(36.dp),
-                    tint = Color.Unspecified
+                    imageVector = if (!isSorting || isPaused) Icons.Filled.PlayArrow else Icons.Filled.ArrowDropDown,
+                    contentDescription = "Toggle",
+                    modifier = Modifier.size(36.dp)
                 )
             }
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Button(
-                onClick = {
-                    if (!isSorting) {
-                        values = parseInput(userInput)
-                        animatedValues.clear()
-                        animatedValues.addAll(values)
-                        isPaused = false
-                        sortTrigger++
-                    }
-                },
-                enabled = !isSorting
-            ) {
+            Button(onClick = {
+                if (!isSorting) {
+                    values = parseInput(userInput)
+                    animatedValues.clear()
+                    animatedValues.addAll(values)
+                    isPaused = false
+                    sortTrigger++
+                }
+            }, enabled = !isSorting) {
                 Text("Visualize Sort 🚀")
             }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = onNavigateToInsertionSort) {
+            Text("Go to Insertion Sort ➡️")
         }
     }
 }
@@ -422,17 +413,166 @@ fun parseInput(input: String): List<Int> {
     }
 }
 @Composable
-fun App() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Grid3DBackground()
-        BubbleSortTitle3D()
-        BubbleSortVisualizer()
-//        Text(text = "Hello king jha", color = Color(0xFF2196F3))
+fun InsertionSortVisualizer(onBack: () -> Unit) {
+    var userInput by remember { mutableStateOf("5,3,8,1,2") }
+    var values by remember { mutableStateOf(parseInput(userInput)) }
+    var animatedValues = remember { mutableStateListOf<Int>().apply { addAll(values) } }
+    var isSorting by remember { mutableStateOf(false) }
+    var isPaused by remember { mutableStateOf(true) }
+    var currentIndex by remember { mutableStateOf(1) }
+    var comparisonMessage by remember { mutableStateOf("") }
+    var comparingIndices by remember { mutableStateOf<Pair<Int, Int>?>(null) }
+    val delayTime = 800L
+    var sortTrigger by remember { mutableStateOf(0) }
+
+    LaunchedEffect(sortTrigger) {
+        isSorting = true
+        for (i in 1 until animatedValues.size) {
+            val key = animatedValues[i]
+            var j = i - 1
+
+            while (j >= 0 && animatedValues[j] > key) {
+                while (isPaused) delay(100L)
+                comparingIndices = j to j + 1
+                comparisonMessage = "Comparing ${animatedValues[j]} > $key — Moving"
+                animatedValues[j + 1] = animatedValues[j]
+                j--
+                delay(delayTime)
+            }
+
+            while (isPaused) delay(100L)
+            animatedValues[j + 1] = key
+            comparisonMessage = "Inserting $key at position ${j + 1}"
+            delay(delayTime)
+        }
+
+        comparisonMessage = "✅ Insertion Sort Complete!"
+        isSorting = false
+        isPaused = true
+        comparingIndices = null
+    }
+
+    val maxBarValue = animatedValues.maxOrNull()?.takeIf { it > 0 } ?: 1
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .padding(top = 80.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (comparisonMessage.isNotEmpty()) {
+            Text(
+                text = comparisonMessage,
+                fontSize = 18.sp,
+                color = Color(0xFF00BCD4),
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            animatedValues.forEachIndexed { index, value ->
+                val heightFactor = value.toFloat() / maxBarValue
+                val barHeight = (heightFactor * 200).dp.coerceAtLeast(40.dp)
+                val isCompared = comparingIndices?.first == index || comparingIndices?.second == index
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = value.toString())
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Box(
+                        modifier = Modifier
+                            .width(40.dp)
+                            .height(barHeight)
+                            .background(
+                                if (isCompared) Color.Red else Color(0xFF4CAF50),
+                                shape = RoundedCornerShape(6.dp)
+                            )
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = userInput,
+            onValueChange = {
+                userInput = it
+                values = parseInput(userInput)
+                animatedValues.clear()
+                animatedValues.addAll(values)
+                comparisonMessage = ""
+            },
+            label = { Text("Enter numbers (e.g. 5,3,8,1,2)") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Row {
+            IconButton(onClick = {
+                if (!isSorting) {
+                    values = parseInput(userInput)
+                    animatedValues.clear()
+                    animatedValues.addAll(values)
+                    isPaused = false
+                    sortTrigger++
+                } else {
+                    isPaused = !isPaused
+                }
+            }) {
+                Icon(
+                    imageVector = if (!isSorting || isPaused) Icons.Default.PlayArrow else Icons.Default.ArrowDropDown,
+                    contentDescription = null,
+                    modifier = Modifier.size(36.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Button(onClick = onBack) {
+                Text("Back to Bubble Sort 🔙")
+            }
+        }
     }
 }
+
+@Composable
+fun App() {
+    var currentScreen by remember { mutableStateOf(SortScreen.BUBBLE) }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        Grid3DBackground()
+
+        when (currentScreen) {
+            SortScreen.BUBBLE -> {
+                BubbleSortTitle3D()
+                BubbleSortVisualizer(
+                    onNavigateToInsertionSort = {
+                        currentScreen = SortScreen.INSERTION
+                    }
+                )
+            }
+            SortScreen.INSERTION -> {
+                BubbleSortTitle3D(modifier = Modifier.padding(top = 30.dp))
+                InsertionSortVisualizer(
+                    onBack = {
+                        currentScreen = SortScreen.BUBBLE
+                    }
+                )
+            }
+        }
+    }
+}
+
 @Composable
 fun BubbleSortTitle3D(modifier: Modifier = Modifier) {
-    // Pulse effect to animate the title
     val pulse by rememberInfiniteTransition().animateFloat(
         initialValue = 1f,
         targetValue = 1.05f,
@@ -535,3 +675,4 @@ fun Grid3DBackground() {
         }
     }
 }
+

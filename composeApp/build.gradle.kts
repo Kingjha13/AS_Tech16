@@ -98,15 +98,11 @@ android {
 }
 
 dependencies {
-    // Android-specific dependencies
     debugImplementation(compose.uiTooling)
     implementation("org.jetbrains.compose.material:material-icons-extended:<version>")
-
-    // Web (WASM) dependencies
     implementation(kotlin("stdlib-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.0") // Optional: if you're using coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.0")
 }
-
 compose.desktop {
     application {
         mainClass = "org.example.project.demo.MainKt"

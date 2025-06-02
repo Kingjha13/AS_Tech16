@@ -1,0 +1,257 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 134217728 bytes. Error detail: G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3828), pid=1040, tid=15268
+#
+# JRE version:  (21.0.5) (build )
+# Java VM: OpenJDK 64-Bit Server VM (21.0.5+-12932927-b750.29, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dcompose.application.configure.swing.globals=true -Dcompose.application.resources.dir=C:\Users\user\Downloads\KotlinProject\KotlinProject\composeApp\build\compose\tmp\prepareAppResources -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant org.example.project.demo.MainKt
+
+Host: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, 8 cores, 7G,  Windows 11 , 64 bit Build 26100 (10.0.26100.3912)
+Time: Mon Jun  2 22:44:58 2025 India Standard Time elapsed time: 0.016854 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000002c3923cab20):  JavaThread "Unknown thread" [_thread_in_vm, id=15268, stack(0x000000dc18a00000,0x000000dc18b00000) (1024K)]
+
+Stack: [0x000000dc18a00000,0x000000dc18b00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6cfb29]
+V  [jvm.dll+0x85ded3]
+V  [jvm.dll+0x86042e]
+V  [jvm.dll+0x860b13]
+V  [jvm.dll+0x27e6b6]
+V  [jvm.dll+0x6cc385]
+V  [jvm.dll+0x6c078a]
+V  [jvm.dll+0x35525b]
+V  [jvm.dll+0x35ceb6]
+V  [jvm.dll+0x3aedd6]
+V  [jvm.dll+0x3af0a8]
+V  [jvm.dll+0x32792c]
+V  [jvm.dll+0x32861b]
+V  [jvm.dll+0x825919]
+V  [jvm.dll+0x3bbfa8]
+V  [jvm.dll+0x80ec88]
+V  [jvm.dll+0x45015e]
+V  [jvm.dll+0x4518c1]
+C  [jli.dll+0x52ab]
+C  [ucrtbase.dll+0x37b0]
+C  [KERNEL32.DLL+0x2e8d7]
+C  [ntdll.dll+0x9c5dc]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffef0950808, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+Total: 0
+
+Other Threads:
+  0x000002c393ec92a0 WorkerThread "GC Thread#0"                     [id=23956, stack(0x000000dc18b00000,0x000000dc18c00000) (1024K)]
+  0x000002c393edad80 ConcurrentGCThread "G1 Main Marker"            [id=16896, stack(0x000000dc18c00000,0x000000dc18d00000) (1024K)]
+  0x000002c393edc020 WorkerThread "G1 Conc#0"                       [id=15396, stack(0x000000dc18d00000,0x000000dc18e00000) (1024K)]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffef014a967]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ffef09bd460] Heap_lock - owner thread: 0x000002c3923cab20
+
+Heap address: 0x0000000081a00000, size: 2022 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000081a00000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 0K, committed 0K, reserved 0K
+  class space    used 0K, committed 0K, reserved 0K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, TAMS=top-at-mark-start, PB=parsable bottom
+
+Card table byte_map: [0x000002c3a6ec0000,0x000002c3a72c0000] _byte_map_base: 0x000002c3a6ab3000
+
+Marking Bits: (CMBitMap*) 0x000002c393ec99a0
+ Bits: [0x000002c3a72c0000, 0x000002c3a9258000)
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.011 Loaded shared library C:\Program Files\Android\Android Studio\jbr\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff636aa0000 - 0x00007ff636aaa000 	C:\Program Files\Android\Android Studio\jbr\bin\java.exe
+0x00007fff76b40000 - 0x00007fff76da6000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007fff75d10000 - 0x00007fff75dd9000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007fff740b0000 - 0x00007fff7447c000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007fff74630000 - 0x00007fff7477b000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007fff6d0e0000 - 0x00007fff6d0fb000 	C:\Program Files\Android\Android Studio\jbr\bin\VCRUNTIME140.dll
+0x00007fff68560000 - 0x00007fff68578000 	C:\Program Files\Android\Android Studio\jbr\bin\jli.dll
+0x00007fff756a0000 - 0x00007fff7586a000 	C:\WINDOWS\System32\USER32.dll
+0x00007fff58e10000 - 0x00007fff590aa000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.3912_none_3e07963ce335137e\COMCTL32.dll
+0x00007fff74480000 - 0x00007fff744a7000 	C:\WINDOWS\System32\win32u.dll
+0x00007fff75c60000 - 0x00007fff75d09000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007fff75670000 - 0x00007fff7569b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007fff73cd0000 - 0x00007fff73e02000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007fff73f40000 - 0x00007fff73fe3000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007fff75630000 - 0x00007fff75660000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007fff6b2f0000 - 0x00007fff6b2fc000 	C:\Program Files\Android\Android Studio\jbr\bin\vcruntime140_1.dll
+0x00007fff5de50000 - 0x00007fff5dedd000 	C:\Program Files\Android\Android Studio\jbr\bin\msvcp140.dll
+0x00007ffeefe10000 - 0x00007ffef0a9a000 	C:\Program Files\Android\Android Studio\jbr\bin\server\jvm.dll
+0x00007fff76270000 - 0x00007fff76322000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007fff74b70000 - 0x00007fff74c16000 	C:\WINDOWS\System32\sechost.dll
+0x00007fff769e0000 - 0x00007fff76af6000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007fff74d80000 - 0x00007fff74df4000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007fff73b40000 - 0x00007fff73b9e000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007fff5c2f0000 - 0x00007fff5c326000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007fff67f50000 - 0x00007fff67f5b000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007fff73b20000 - 0x00007fff73b34000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007fff72a90000 - 0x00007fff72aaa000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007fff69330000 - 0x00007fff6933a000 	C:\Program Files\Android\Android Studio\jbr\bin\jimage.dll
+0x00007fff6e480000 - 0x00007fff6e6c1000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007fff76500000 - 0x00007fff76884000 	C:\WINDOWS\System32\combase.dll
+0x00007fff76340000 - 0x00007fff76420000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007fff585e0000 - 0x00007fff58619000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007fff73e10000 - 0x00007fff73ea9000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007fff5ede0000 - 0x00007fff5ee00000 	C:\Program Files\Android\Android Studio\jbr\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Android\Android Studio\jbr\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.3912_none_3e07963ce335137e;C:\Program Files\Android\Android Studio\jbr\bin\server
+
+VM Arguments:
+jvm_args: -Dcompose.application.configure.swing.globals=true -Dcompose.application.resources.dir=C:\Users\user\Downloads\KotlinProject\KotlinProject\composeApp\build\compose\tmp\prepareAppResources -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant 
+java_command: org.example.project.demo.MainKt
+java_class_path (initial): C:\Users\user\Downloads\KotlinProject\KotlinProject\composeApp\build\libs\composeApp-desktop.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.desktop\desktop-jvm\1.7.3\128a1262fd72c68277ebadf308a07ff086206f8e\desktop-jvm-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.material\material-desktop\1.7.3\e87876e0c6f36990f13cedb09d820469fd6cc371\material-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.components\components-resources-desktop\1.7.3\aeb1cd8677ec680fcf716aecbaf1a2aafc217622\library-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.material\material-ripple-desktop\1.7.3\42b03965266ad123672e8a87f98d914dc8c072bf\material-ripple-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.foundation\foundation-desktop\1.7.3\77da4f0c26d63177315b3dce06c48177c5d49704\foundation-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.animation\animation-desktop\1.7.3\c1fec150a3d1eadfe4643a550cbc9c83d106ef98\animation-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.foundation\foundation-layout-desktop\1.7.3\99ee09906c30143ece1a7e9d1ab25db99ca65876\foundation-layout-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.animation\animation-core-desktop\1.7.3\bd53e84498bdf06232c08e6fe11a64d46c9ca7b0\animation-core-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.material\material-icons-core-desktop\1.7.3\414b3096050fe647b0638832eace80f22c06b85c\material-icons-core-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-desktop\1.7.3\22a701ef59ec9421266c8785986f781516e76ef5\ui-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.androidx.lifecycle\lifecycle-runtime-compose-desktop\2.8.4\e950e2a504a045ac652718dc20e736f28c5ff4c2\lifecycle-runtime-compose-desktop-2.8.4.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-text-desktop\1.7.3\9fcd54866d7c2132d921b337ad8967f90cc25b85\ui-text-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.runtime\runtime-saveable-desktop\1.7.3\16cec893bca783af229978ba2091f58eea6906c1\runtime-saveable-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-graphics-desktop\1.7.3\be86982050f5b5367d67713145409050674c1952\ui-graphics-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-unit-desktop\1.7.3\fecd4bde2d2f1cfbe2118d175ec7030a50e63f20\ui-unit-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-geometry-desktop\1.7.3\dfc47c11ec416d93f53ae19103143d741a3d8b14\ui-geometry-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-tooling-preview-desktop\1.7.3\62232c44c61692b56d3071c29b0f9c8481b20574\ui-tooling-preview-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.runtime\runtime-desktop\1.7.3\c7ec36fb96961f1cd208a4e0daab62eebb1e3728\runtime-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\androidx.lifecycle\lifecycle-runtime-desktop\2.8.5\fed8b9973735cbe77645edf153d5f7bb412bfd45\lifecycle-runtime-desktop-2.8.5.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\androidx.lifecycle\lifecycle-common-jvm\2.8.5\7174a594afb73a9ad9ac9074ce78b94af3cc52a7\lifecycle-common-jvm-2.8.5.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\androidx.lifecycle\lifecycle-viewmodel-desktop\2.8.5\572f6fed6a70c5d87c9a0d17d05828ff1a6f19f8\lifecycle-viewmodel-desktop-2.8.5.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.skiko\skiko-awt-runtime-windows-x64\0.8.18\82e10dceacc2cbd6bf765fe18766a21b3d17c3fc\skiko-awt-runtime-windows-x64-0.8.18.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.skiko\skiko-awt\0.8.18\4057f3b15af20ac9c728ba88a5c160299dca8e1a\skiko-awt-0.8.18.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.10.1\fe066928754beda3d59c8282e04289546465a360\kotlinx-coroutines-core-jvm-1.10.1.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-swing\1.10.1\37650f51bdaeabcc8dfd50222d9a6c8a70542efc\kotlinx-coroutines-swing-1.10.1.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.components\components-ui-tooling-preview-desktop\1.7.3\8f7a6367fc68382f164dd64ef4b88f98a531b612\library-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk8\1.9.24\a2f6d82081a54b52ceb120c5a18f87402ccab0c\kotlin-stdlib-jdk8-1.9.24.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\atomicfu-jvm\0.23.2\a4601dc42dceb031a586058e8356ff778a57dea0\atomicfu-jvm-0.23.2.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.compose.ui\ui-util-desktop\1.7.3\3c2234b2741de97514d440cfa08fa243ef87ce53\ui-util-desktop-1.7.3.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk7\1.9.24\46b6e1099acabc71feca1c0013deee78e6793d07\kotlin-stdlib-jdk7-1.9.24.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\androidx.collection\collection-jvm\1.4.0\e209fb7bd1183032f55a0408121c6251a81acb49\collection-jvm-1.4.0.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\androidx.arch.core\core-common\2.2.0\5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3\core-common-2.2.0.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\androidx.annotation\annotation-jvm\1.8.0\b8a16fe526014b7941c1debaccaf9c5153692dbb\annotation-jvm-1.8.0.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\2.1.10\d3028429e7151d7a7c1a0d63a4f60eac86a87b91\kotlin-stdlib-2.1.10.jar;C:\Users\user\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\23.0.0\8cc20c07506ec18e0834947b84a864bfc094484e\annotations-23.0.0.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 8                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 2120220672                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 2120220672                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-23\bin\python-3.13.1-amd64.exe
+PATH=C:\Program Files\Java\jdk-23\bin;C:\Program Files\Cloudflare\Cloudflare WARP\;C:\Users\user\Downloads\gradle-8.14\bin;C:\Users\user\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\user\AppData\Local\Programs\Python\Python313\;C:\Users\user\AppData\Local\Microsoft\WindowsApps;C:\Users\user\Downloads\gcc-14.2.0-no-debug\bin;C:\Users\user\Downloads\gcc-14.2.0-no-debug\;C:\Program Files\Java\jdk-23\bin;C:\Program Files (x86)\kot\kotlinc\bin;C:\Program Files (x86)\kot\kotlinc\;C:\Program Files\Notepad++;
+USERNAME=user
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+TMP=C:\Users\user\AppData\Local\Temp
+TEMP=C:\Users\user\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+JNI global refs:
+JNI global refs: 0, weak refs: 0
+
+JNI global refs memory usage: 0, weak refs: 0
+
+Process memory usage:
+Resident Set Size: 12472K (0% of 8277208K total physical memory with 460132K free physical memory)
+
+OOME stack traces (most recent first):
+Classloader memory used:
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 26100 (10.0.26100.3912)
+OS uptime: 5 days 10:15 hours
+
+CPU: total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 10 microcode 0xf0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt, rdtscp, f16c
+Processor Information for all 8 processors :
+  Max Mhz: 1800, Current Mhz: 1600, Mhz Limit: 1584
+
+Memory: 4k page, system-wide physical 8083M (449M free)
+TotalPageFile size 18427M (AvailPageFile size 104M)
+current process WorkingSet (physical memory assigned to process): 12M, peak: 12M
+current process commit charge ("private bytes"): 60M, peak: 188M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.5+-12932927-b750.29) for windows-amd64 JRE (21.0.5+-12932927-b750.29), built on 2025-01-17T02:01:10Z by "builder" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.
