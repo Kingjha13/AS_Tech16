@@ -402,7 +402,7 @@ fun BubbleSortVisualizer(onNavigateToInsertionSort: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = onNavigateToInsertionSort) {
-            Text("Go to Insertion Sort ➡️")
+            Text("Go to Insertion Sort Avanish jha golu very good ➡️")
         }
     }
 }
