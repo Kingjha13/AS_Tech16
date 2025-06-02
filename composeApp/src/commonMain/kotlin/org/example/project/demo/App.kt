@@ -293,12 +293,14 @@ fun BubbleSortVisualizer() {
         }
         isSorting = false
         isPaused = true
-        comparisonMessage = "✅ Sorting complete!"
+//        comparisonMessage = "✅ Sorting complete!"
+        comparisonMessage = "Avanish jha"
         comparingIndices = null
     }
 
     LaunchedEffect(comparisonMessage) {
-        if (comparisonMessage == "✅ Sorting complete!") {
+//        if (comparisonMessage == "✅ Sorting incomplete!") {
+        if (comparisonMessage == "Avanish jha") {
             delay(2000L)
             comparisonMessage = ""
         }
@@ -374,7 +376,6 @@ fun BubbleSortVisualizer() {
             }) {
                 Text(if (showInputField) "Hide Input ❌" else "Edit Input ✏️")
             }
-
             Spacer(modifier = Modifier.width(16.dp))
 
             IconButton(onClick = {
