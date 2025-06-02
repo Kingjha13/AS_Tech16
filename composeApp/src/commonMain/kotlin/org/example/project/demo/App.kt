@@ -265,7 +265,6 @@ fun BubbleSortVisualizer() {
     var showInputField by remember { mutableStateOf(false) }
     var sortTrigger by remember { mutableStateOf(0) }
     var comparingIndices by remember { mutableStateOf<Pair<Int, Int>?>(null) }
-
     val delayTime = 800L
 
     LaunchedEffect(sortTrigger) {
