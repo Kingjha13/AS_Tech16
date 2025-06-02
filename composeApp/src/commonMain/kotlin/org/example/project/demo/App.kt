@@ -425,14 +425,10 @@ fun parseInput(input: String): List<Int> {
 @Composable
 fun App() {
     Box(modifier = Modifier.fillMaxSize()) {
-        //AnimatedBackground()
         Grid3DBackground()
         BubbleSortTitle3D()
         BubbleSortVisualizer()
-        //MainUI(modifier = Modifier.fillMaxSize())
-
-        //ActionBar(modifier = Modifier.align(Alignment.TopCenter))
-        //BubbleSortVisualizer()
+//        Text(text = "Hello king jha", color = Color(0xFF2196F3))
     }
 }
 @Composable
