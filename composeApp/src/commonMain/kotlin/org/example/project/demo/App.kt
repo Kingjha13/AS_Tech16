@@ -63,197 +63,6 @@ import org.jetbrains.compose.resources.painterResource
 import kotlinproject.composeapp.generated.resources.Res
 import kotlinproject.composeapp.generated.resources.compose_multiplatform
 import kotlinx.coroutines.delay
-//@Composable
-//@Preview
-//fun App() {
-//    MaterialTheme {
-//        var showContent by remember { mutableStateOf(false) }
-//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-//            Button(onClick = { showContent = !showContent }) {
-//                Text("Hello Avanish jha you can do anything.!")
-//            }
-//            AnimatedVisibility(showContent) {
-//                val greeting = remember { Greeting().greet() }
-//                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-//                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-//                    Text("Compose: $greeting")
-//                }
-//            }
-//        }
-//    }
-//}
-
-//@Composable
-//fun BubbleSortVisualizer() {
-//    var userInput by remember { mutableStateOf("5,3,8,1,2") }
-//    var values by remember { mutableStateOf(parseInput(userInput)) }
-//    var animatedValues = remember { mutableStateListOf<Int>().apply { addAll(values) } }
-//    var isSorting by remember { mutableStateOf(false) }
-//    var isPaused by remember { mutableStateOf(true) }
-//    var comparisonMessage by remember { mutableStateOf("") }
-//    var showInputField by remember { mutableStateOf(false) }
-//    var sortTrigger by remember { mutableStateOf(0) }
-//    var comparingIndices by remember { mutableStateOf<Pair<Int, Int>?>(null) }
-//
-//    val delayTime = 800L // Fixed default delay
-//
-//    LaunchedEffect(sortTrigger) {
-//        isSorting = true
-//        for (i in 0 until animatedValues.size - 1) {
-//            for (j in 0 until animatedValues.size - i - 1) {
-//                while (isPaused) delay(100L)
-//
-//                comparingIndices = j to j + 1
-//                val a = animatedValues[j]
-//                val b = animatedValues[j + 1]
-//
-//                comparisonMessage = when {
-//                    a > b -> {
-//                        animatedValues[j] = b
-//                        animatedValues[j + 1] = a
-//                        "Comparing $a > $b — Swapped"
-//                    }
-//                    a < b -> "Comparing $a < $b — No swap needed"
-//                    else -> "Comparing $a == $b — No swap needed"
-//                }
-//
-//                delay(delayTime)
-//            }
-//        }
-//        isSorting = false
-//        isPaused = true
-//        comparisonMessage = "✅ Sorting complete!"
-//        comparingIndices = null
-//    }
-//
-//    LaunchedEffect(comparisonMessage) {
-//        if (comparisonMessage == "✅ Sorting complete!") {
-//            delay(2000L)
-//            comparisonMessage = ""
-//        }
-//    }
-//
-//    val maxBarValue = animatedValues.maxOrNull()?.takeIf { it > 0 } ?: 1
-//
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .padding(top = 40.dp)
-//            .padding(16.dp),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        if (comparisonMessage.isNotEmpty()) {
-//            Text(
-//                text = comparisonMessage,
-//                fontWeight = FontWeight.Medium,
-//                fontSize = 18.sp,
-//                color = Color.Magenta
-//            )
-//        }
-//
-//        Spacer(modifier = Modifier.height(10.dp))
-//
-//        Row(
-//            modifier = Modifier.fillMaxWidth(),
-//            horizontalArrangement = Arrangement.SpaceEvenly
-//        ) {
-//            animatedValues.forEachIndexed { index, value ->
-//                val heightFactor = value.toFloat() / maxBarValue
-//                val barHeight = (heightFactor * 200).dp.coerceAtLeast(40.dp)
-//                val isCompared = comparingIndices?.first == index || comparingIndices?.second == index
-//
-//                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                    Text(text = value.toString())
-//                    Spacer(modifier = Modifier.height(4.dp))
-//                    Box(
-//                        modifier = Modifier
-//                            .width(40.dp)
-//                            .height(barHeight)
-//                            .background(
-//                                if (isCompared) Color.Red else Color(0xFF2196F3),
-//                                shape = RoundedCornerShape(6.dp)
-//                            )
-//                    )
-//                }
-//            }
-//        }
-//
-//        Spacer(modifier = Modifier.height(12.dp))
-//
-//        if (showInputField) {
-//            OutlinedTextField(
-//                value = userInput,
-//                onValueChange = {
-//                    userInput = it
-//                    values = parseInput(userInput)
-//                    animatedValues.clear()
-//                    animatedValues.addAll(values)
-//                    comparisonMessage = ""
-//                },
-//                label = { Text("Enter numbers (e.g. 5,3,8,1,2)") },
-//                singleLine = true,
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//            Spacer(modifier = Modifier.height(13.dp))
-//        }
-//
-//        Row {
-//            Button(onClick = {
-//                showInputField = !showInputField
-//            }) {
-//                Text(if (showInputField) "Hide Input ❌" else "Edit Input ✏️")
-//            }
-//
-//            Spacer(modifier = Modifier.width(16.dp))
-//
-//            IconButton(onClick = {
-//                if (!isSorting) {
-//                    values = parseInput(userInput)
-//                    animatedValues.clear()
-//                    animatedValues.addAll(values)
-//                    isPaused = false
-//                    sortTrigger++
-//                } else {
-//                    isPaused = !isPaused
-//                }
-//            }) {
-//                Icon(
-//                    imageVector = if (!isSorting || isPaused)
-//                        Icons.Filled.PlayArrow
-//                    else
-//                        Icons.Filled.Build,
-//                    contentDescription = if (!isSorting || isPaused) "Start or Continue" else "Pause",
-//                    modifier = Modifier.size(36.dp),
-//                    tint = Color.Unspecified
-//                )
-//
-//            }
-//
-//            Spacer(modifier = Modifier.width(16.dp))
-//
-//            Button(
-//                onClick = {
-//                    if (!isSorting) {
-//                        values = parseInput(userInput)
-//                        animatedValues.clear()
-//                        animatedValues.addAll(values)
-//                        isPaused = false
-//                        sortTrigger++
-//                    }
-//                },
-//                enabled = !isSorting
-//            ) {
-//                Text("Visualize Sort 🚀")
-//            }
-//        }
-//    }
-//}
-//fun parseInput(input: String): List<Int> {
-//    return input.split(",").mapNotNull {
-//        it.trim().toIntOrNull()
-//    }
-//}
 
 @Composable
 fun BubbleSortVisualizer(onNavigateToInsertionSort: () -> Unit) {
@@ -570,7 +379,6 @@ fun App() {
         }
     }
 }
-
 @Composable
 fun BubbleSortTitle3D(modifier: Modifier = Modifier) {
     val pulse by rememberInfiniteTransition().animateFloat(
@@ -676,3 +484,194 @@ fun Grid3DBackground() {
     }
 }
 
+//@Composable
+//@Preview
+//fun App() {
+//    MaterialTheme {
+//        var showContent by remember { mutableStateOf(false) }
+//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//            Button(onClick = { showContent = !showContent }) {
+//                Text("Hello Avanish jha you can do anything.!")
+//            }
+//            AnimatedVisibility(showContent) {
+//                val greeting = remember { Greeting().greet() }
+//                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+//                    Text("Compose: $greeting")
+//                }
+//            }
+//        }
+//    }
+//}
+
+//@Composable
+//fun BubbleSortVisualizer() {
+//    var userInput by remember { mutableStateOf("5,3,8,1,2") }
+//    var values by remember { mutableStateOf(parseInput(userInput)) }
+//    var animatedValues = remember { mutableStateListOf<Int>().apply { addAll(values) } }
+//    var isSorting by remember { mutableStateOf(false) }
+//    var isPaused by remember { mutableStateOf(true) }
+//    var comparisonMessage by remember { mutableStateOf("") }
+//    var showInputField by remember { mutableStateOf(false) }
+//    var sortTrigger by remember { mutableStateOf(0) }
+//    var comparingIndices by remember { mutableStateOf<Pair<Int, Int>?>(null) }
+//
+//    val delayTime = 800L // Fixed default delay
+//
+//    LaunchedEffect(sortTrigger) {
+//        isSorting = true
+//        for (i in 0 until animatedValues.size - 1) {
+//            for (j in 0 until animatedValues.size - i - 1) {
+//                while (isPaused) delay(100L)
+//
+//                comparingIndices = j to j + 1
+//                val a = animatedValues[j]
+//                val b = animatedValues[j + 1]
+//
+//                comparisonMessage = when {
+//                    a > b -> {
+//                        animatedValues[j] = b
+//                        animatedValues[j + 1] = a
+//                        "Comparing $a > $b — Swapped"
+//                    }
+//                    a < b -> "Comparing $a < $b — No swap needed"
+//                    else -> "Comparing $a == $b — No swap needed"
+//                }
+//
+//                delay(delayTime)
+//            }
+//        }
+//        isSorting = false
+//        isPaused = true
+//        comparisonMessage = "✅ Sorting complete!"
+//        comparingIndices = null
+//    }
+//
+//    LaunchedEffect(comparisonMessage) {
+//        if (comparisonMessage == "✅ Sorting complete!") {
+//            delay(2000L)
+//            comparisonMessage = ""
+//        }
+//    }
+//
+//    val maxBarValue = animatedValues.maxOrNull()?.takeIf { it > 0 } ?: 1
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(top = 40.dp)
+//            .padding(16.dp),
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        if (comparisonMessage.isNotEmpty()) {
+//            Text(
+//                text = comparisonMessage,
+//                fontWeight = FontWeight.Medium,
+//                fontSize = 18.sp,
+//                color = Color.Magenta
+//            )
+//        }
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        Row(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalArrangement = Arrangement.SpaceEvenly
+//        ) {
+//            animatedValues.forEachIndexed { index, value ->
+//                val heightFactor = value.toFloat() / maxBarValue
+//                val barHeight = (heightFactor * 200).dp.coerceAtLeast(40.dp)
+//                val isCompared = comparingIndices?.first == index || comparingIndices?.second == index
+//
+//                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+//                    Text(text = value.toString())
+//                    Spacer(modifier = Modifier.height(4.dp))
+//                    Box(
+//                        modifier = Modifier
+//                            .width(40.dp)
+//                            .height(barHeight)
+//                            .background(
+//                                if (isCompared) Color.Red else Color(0xFF2196F3),
+//                                shape = RoundedCornerShape(6.dp)
+//                            )
+//                    )
+//                }
+//            }
+//        }
+//
+//        Spacer(modifier = Modifier.height(12.dp))
+//
+//        if (showInputField) {
+//            OutlinedTextField(
+//                value = userInput,
+//                onValueChange = {
+//                    userInput = it
+//                    values = parseInput(userInput)
+//                    animatedValues.clear()
+//                    animatedValues.addAll(values)
+//                    comparisonMessage = ""
+//                },
+//                label = { Text("Enter numbers (e.g. 5,3,8,1,2)") },
+//                singleLine = true,
+//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+//                modifier = Modifier.fillMaxWidth()
+//            )
+//            Spacer(modifier = Modifier.height(13.dp))
+//        }
+//
+//        Row {
+//            Button(onClick = {
+//                showInputField = !showInputField
+//            }) {
+//                Text(if (showInputField) "Hide Input ❌" else "Edit Input ✏️")
+//            }
+//
+//            Spacer(modifier = Modifier.width(16.dp))
+//
+//            IconButton(onClick = {
+//                if (!isSorting) {
+//                    values = parseInput(userInput)
+//                    animatedValues.clear()
+//                    animatedValues.addAll(values)
+//                    isPaused = false
+//                    sortTrigger++
+//                } else {
+//                    isPaused = !isPaused
+//                }
+//            }) {
+//                Icon(
+//                    imageVector = if (!isSorting || isPaused)
+//                        Icons.Filled.PlayArrow
+//                    else
+//                        Icons.Filled.Build,
+//                    contentDescription = if (!isSorting || isPaused) "Start or Continue" else "Pause",
+//                    modifier = Modifier.size(36.dp),
+//                    tint = Color.Unspecified
+//                )
+//
+//            }
+//
+//            Spacer(modifier = Modifier.width(16.dp))
+//
+//            Button(
+//                onClick = {
+//                    if (!isSorting) {
+//                        values = parseInput(userInput)
+//                        animatedValues.clear()
+//                        animatedValues.addAll(values)
+//                        isPaused = false
+//                        sortTrigger++
+//                    }
+//                },
+//                enabled = !isSorting
+//            ) {
+//                Text("Visualize Sort 🚀")
+//            }
+//        }
+//    }
+//}
+//fun parseInput(input: String): List<Int> {
+//    return input.split(",").mapNotNull {
+//        it.trim().toIntOrNull()
+//    }
+//}
